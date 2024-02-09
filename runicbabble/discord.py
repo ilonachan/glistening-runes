@@ -77,7 +77,8 @@ async def send_as_webhook(
                 log.info("Hikari has not yet implemented threads, and possibly webhooks can't be used in threads")
                 return None
             for wh in whs:
-                if isinstance(wh, IncomingWebhook) and wh.name == f'runicbabble-{int(channel)}':
+                if isinstance(wh, IncomingWebhook) and wh.name == f'runicbabble-{int(channel)}'\
+                        and wh.token is not None:
                     log.info(f'Webhook for channel {int(channel)} was found, reusing')
                     webhooks[int(channel)] = wh
                     break
