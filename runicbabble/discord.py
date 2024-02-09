@@ -33,7 +33,7 @@ guild_ids = cfg.discord.slash_command_guilds(None)
 if cfg.discord.global_slash_commands(False):
     guild_ids = None
 
-bot = lightbulb.BotApp(intents=hikari.Intents.ALL, banner=None,
+bot = lightbulb.BotApp(intents=hikari.Intents.ALL_UNPRIVILEGED | hikari.Intents.MESSAGE_CONTENT, banner=None,
                        token=cfg.discord.bot_token(),
                        help_class=CustomHelp,
                        default_enabled_guilds=guild_ids)

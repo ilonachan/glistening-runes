@@ -4,3 +4,5 @@ __pycache__/
 /.idea/
 /deploy.env
 /config/deploy/
+/nohup.out
+/pid.lock

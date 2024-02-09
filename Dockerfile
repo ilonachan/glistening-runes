@@ -1,15 +1,23 @@
-FROM python:3.9
+FROM python:3.10
 
 VOLUME /bot/config
 
 WORKDIR /bot
 
+RUN useradd -m -r user && \
+    chown user /bot
+
 # install required libraries
-COPY ./requirements.txt /bot/requirements.txt
-RUN pip install -r /bot/requirements.txt
+COPY requirements.txt ./
+RUN pip install -r requirements.txt
 
 # copy the code and default configuration
-COPY ./runicbabble /bot/runicbabble
-COPY ./logging.yaml /bot/logging.yaml
+COPY ./runicbabble ./runicbabble
+COPY ./logging.yaml ./
+
+ARG GIT_HASH
+ENV GIT_HASH=${GIT_HASH:-dev}
+
+USER user
 
 CMD [ "python", "-m", "runicbabble" ]
