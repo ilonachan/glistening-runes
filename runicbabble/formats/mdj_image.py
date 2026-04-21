@@ -1,7 +1,7 @@
 import io
 
 import hikari
-from PIL import Image, ImageDraw, ImageFont
+from PIL import Image, ImageDraw, ImageFont, ImageText
 from .mdj_emotes import mdj_format
 
 
@@ -50,7 +50,8 @@ def render(message: str, fontsize: int, wrap: str = 'none', line_length: int = 8
         msg = text_wrap(msg, line_length=line_length, force=(wrap == 'force'))
 
     font = ImageFont.truetype(path, fontsize)
-    size = font.getsize_multiline(msg)
+    text = ImageText.Text(msg, font)
+    size = text.get_bbox()[2:]
     img = Image.new("RGBA", size, (0, 0, 0, 0))
     draw = ImageDraw.Draw(img)
 
